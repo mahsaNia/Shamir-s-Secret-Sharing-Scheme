@@ -10,3 +10,8 @@ def generate(S, t, n, p):
 
     shares = [(i, random_polynomial(i)) for i in range(1, n + 1)]
     return shares
+
+def reconstruct_secret(shares, p):
+    def lagrange_interpolate(x, x_s, y_s, p):
+        def product(vals):
+            return reduce(lambda x, y: x * y, vals)
