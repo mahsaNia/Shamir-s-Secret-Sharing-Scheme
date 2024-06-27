@@ -24,3 +24,16 @@ def reconstruct_secret(shares, p):
         def denominator(i):
             return product(x_s[i] - x_s[m] for m in range(len(x_s)) if m != i)
 
+        k = len(x_s)
+        secret = 0
+        for i in range(k):
+            num = numerator(i)
+            den = denominator(i)
+            lagrange_basis = (num * pow(den, -1, p)) % p
+            secret = (secret + y_s[i] * lagrange_basis) % p
+
+        return secret
+
+    x_s, y_s = zip(*shares)
+    return lagrange_interpolate(0, x_s, y_s, p)
+
