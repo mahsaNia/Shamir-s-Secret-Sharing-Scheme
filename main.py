@@ -37,3 +37,17 @@ def reconstruct_secret(shares, p):
     x_s, y_s = zip(*shares)
     return lagrange_interpolate(0, x_s, y_s, p)
 
+
+# example
+S = 9
+t = 3
+n = 5
+p = 13
+
+
+shares = generate(S, t, n, p)
+print("Shares:", shares)
+
+t_shares = shares[:t]
+reconstructed_secret = reconstruct_secret(t_shares, p)
+print("Reconstructed Secret:", reconstructed_secret)
